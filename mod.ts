@@ -9,6 +9,6 @@ client.on('ready', () => {
 	console.log('Ready!');
 });
 
-client.commands.loader.loadDirectory('./commands');
+client.commands.loader.loadDirectory('./commands', { maxDepth: 2 });
 
 client.connect(config.token, Intents.None);
