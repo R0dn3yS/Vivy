@@ -33,10 +33,10 @@ export default class UserinfoCommand extends Command {
 		const joined = Intl.DateTimeFormat('en-US').format(new Date(cMember.joinedAt))
 		
 		const uEmbed = new Embed()
-			.setFooter(cMember.displayName, cUser.avatarURL())
+			.setFooter(cMember.displayName ? cMember.displayName : cUser.username, cUser.avatarURL())
 			.setThumbnail(cUser.avatarURL())
 			.setColor(await cMember.effectiveColor())
-			.addField('Member Information', stripIndent `**> Display Name:** ${cMember.displayName}
+			.addField('Member Information', stripIndent `**> Display Name:** ${cMember.displayName ? cMember.displayName : cUser.username}
 			**> Joined At:** ${joined}
 			**> Roles:** ${roles.join(' ')}`, true)
 			.addField('User Information', stripIndent `**> ID:** ${cUser.id}
