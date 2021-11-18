@@ -4,6 +4,7 @@ import type { Args, User, Member, GuildTextBasedChannel } from '../../deps.ts';
 export default class BanCommand extends Command {
 	name = 'ban';
 	category = 'admin';
+	ownerOnly = true;
 	args: Args[] = [
 		{
 			name: 'user',
