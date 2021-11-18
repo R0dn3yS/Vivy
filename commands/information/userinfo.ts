@@ -25,7 +25,7 @@ export default class UserinfoCommand extends Command {
 		// Get Roles
 		const roles: string[] = [];
 		(await cMember.roles.array()).forEach(role => {
-			if (role.id !== '486410117961744384') roles.push(`<@&${role.id}>`);
+			if (role.id !== ctx.guild?.id) roles.push(`<@&${role.id}>`);
 		})
 
 		// Get Dates
