@@ -17,7 +17,8 @@ export default class KickCommand extends Command {
 	]
 	async execute(ctx: CommandContext) {
 		const kUser: User = ctx.args!.user as User;
-		const kMember: Member = await ctx.guild!.members.fetch(kUser.id);
+		const kMember: Member = await ctx.guild!.members.resolve(kUser.id) as Member;
+
 		const reason: string = ctx.args!.reason as string;
 		const adminLog = await ctx.guild!.channels.get('535389016338464771') as GuildTextBasedChannel;
 
@@ -28,7 +29,7 @@ export default class KickCommand extends Command {
 		}
 
 		if (!kMember.kickable) {
-			return ctx.message.reply('I cannot kick this user');
+			return ctx.message.reply('I cannot kick this user.');
 		}
 
 		kMember.kick(reason);
@@ -44,4 +45,6 @@ export default class KickCommand extends Command {
 
 		adminLog.send(kickEmbed);
 	}
+
+	onError(ctx: CommandContext) {console.log(ctx)}
 }

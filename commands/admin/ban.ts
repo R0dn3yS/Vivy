@@ -28,7 +28,7 @@ export default class BanCommand extends Command {
 		}
 
 		if (!bMember.bannable) {
-			return ctx.message.reply('I cannot ban this user');
+			return ctx.message.reply('I cannot ban this user.');
 		}
 
 		bMember.ban(reason);
