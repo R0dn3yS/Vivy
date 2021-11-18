@@ -15,6 +15,7 @@ client.commands.loader.loadDirectory('./commands', { maxDepth: 2 });
 client.on('messageCreate', (message: Message) => {
 	if (message.author.bot) return;
 
+	// Quote Checker
 	if (message.channelID == '789201783901650975') {
 		const fullYear = new Date(Date.now()).getFullYear();
 		const year = fullYear.toString().substring(2);

@@ -15,7 +15,7 @@ export default class UserinfoCommand extends Command {
 		// Get User
 		let cUser: User
 		if (!ctx.args!.user) {
-			cUser = ctx.author
+			cUser = ctx.author;
 		} else {
 			cUser = ctx.args!.user as User;
 		}
@@ -25,7 +25,7 @@ export default class UserinfoCommand extends Command {
 		// Get Roles
 		const roles: string[] = [];
 		(await cMember.roles.array()).forEach(role => {
-			roles.push(`<@&${role.id}>`)
+			if (role.id !== '486410117961744384') roles.push(`<@&${role.id}>`);
 		})
 
 		// Get Dates
