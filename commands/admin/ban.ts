@@ -17,7 +17,7 @@ export default class BanCommand extends Command {
 	]
 	async execute(ctx: CommandContext) {
 		const bUser: User = ctx.args!.user as User;
-		const bMember: Member = await ctx.guild!.members.fetch(bUser.id);
+		const bMember: Member = await ctx.guild!.members.resolve(bUser.id) as Member;
 		const reason: string = ctx.args!.reason as string;
 		const adminLog = await ctx.guild!.channels.get('535389016338464771') as GuildTextBasedChannel;
 
