@@ -1,3 +1,3 @@
-# Sagiri Discord Bot
+# Vivy Discord Bot
 
 more information soon
