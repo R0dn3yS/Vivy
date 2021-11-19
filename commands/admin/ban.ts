@@ -1,5 +1,5 @@
-import { CommandContext, Command, Embed, stripIndent } from '../../deps.ts';
-import type { Args, User, Member, GuildTextBasedChannel } from '../../deps.ts';
+import { Command, CommandContext, Embed, stripIndent } from '../../deps.ts';
+import type { Args, GuildTextBasedChannel, Member, User } from '../../deps.ts';
 
 export default class BanCommand extends Command {
 	name = 'ban';
@@ -8,18 +8,22 @@ export default class BanCommand extends Command {
 	args: Args[] = [
 		{
 			name: 'user',
-			match: 'user'
+			match: 'user',
 		},
 		{
 			name: 'reason',
-			match: 'rest'
-		}
-	]
+			match: 'rest',
+		},
+	];
 	async execute(ctx: CommandContext) {
 		const bUser: User = ctx.args!.user as User;
-		const bMember: Member = await ctx.guild!.members.resolve(bUser.id) as Member;
+		const bMember: Member = await ctx.guild!.members.resolve(
+			bUser.id,
+		) as Member;
 		const reason: string = ctx.args!.reason as string;
-		const adminLog = await ctx.guild!.channels.get('535389016338464771') as GuildTextBasedChannel;
+		const adminLog = await ctx.guild!.channels.get(
+			'535389016338464771',
+		) as GuildTextBasedChannel;
 
 		if (!bUser) {
 			return ctx.message.reply('No user specified.');
@@ -37,9 +41,12 @@ export default class BanCommand extends Command {
 			.setThumbnail(bUser.avatarURL())
 			.setFooter(ctx.client.user!.username, ctx.client.user!.avatarURL())
 			.setColor('#FF0000')
-			.addField('Member Banned', stripIndent`**> Banned member:** ${bUser}
+			.addField(
+				'Member Banned',
+				stripIndent`**> Banned member:** ${bUser}
 			**> Banned by:** ${ctx.message.author}
-			**> Reason:** ${reason}`)
+			**> Reason:** ${reason}`,
+			)
 			.setTimestamp(Date.now());
 
 		adminLog.send(banEmbed);
