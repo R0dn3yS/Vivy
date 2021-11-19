@@ -2,7 +2,7 @@ import { CommandClient, Intents, Message, delay } from './deps.ts';
 import { config } from './config.ts';
 
 const client = new CommandClient({
-	prefix: '!',
+	prefix: '\\',
 	owners: ['325254775828512778']
 })
 
