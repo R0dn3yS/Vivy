@@ -3,7 +3,7 @@ import { config } from './config.ts';
 
 const client = new CommandClient({
 	prefix: '\\',
-	owners: ['325254775828512778']
+	owners: config.owners
 })
 
 client.on('ready', () => {
