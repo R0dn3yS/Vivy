@@ -31,7 +31,9 @@ export default class BanCommand extends Command {
 			return ctx.message.reply('I cannot ban this user.');
 		}
 
-		bMember.ban(reason);
+		bMember.ban(reason).catch(e => {
+			console.error(e);
+		}) ;
 
 		const banEmbed = new Embed()
 			.setThumbnail(bUser.avatarURL())

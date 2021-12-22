@@ -31,7 +31,9 @@ export default class KickCommand extends Command {
 			return ctx.message.reply('I cannot kick this user.');
 		}
 
-		kMember.kick(reason);
+		kMember.kick(reason).catch(e => {
+			console.error(e);
+		}) ;
 
 		const kickEmbed = new Embed()
 			.setThumbnail(kUser.avatarURL())
