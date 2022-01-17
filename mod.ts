@@ -25,6 +25,15 @@ client.on('messageCreate', async (message: Message) => {
 		await delay(2500);
 		botMessage.delete();
 	}
+
+	if (message.content.startsWith('[') && message.content.endsWith(']')) {
+		const REGEX = new RegExp('[0-9]{1,6}');
+		const digits = message.content.substring(1, message.content.length - 1);
+
+		if (REGEX.test(digits)) {
+			message.channel.send(`https://nhentai.net/g/` + digits);
+		}
+	}
 });
 
 client.connect(config.token, Intents.All);
