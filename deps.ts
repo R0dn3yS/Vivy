@@ -1,4 +1,4 @@
-export * from 'https://code.harmony.rocks/v2.4.0/mod.ts';
+export * from 'https://code.harmony.rocks/v2.5.0/mod.ts';
 
 // @deno-types="https://deno.land/x/usefultags@1.1.1/usefulTags.d.ts"
 export { stripIndent } from "https://deno.land/x/usefultags@1.1.1/usefulTags.mjs";
