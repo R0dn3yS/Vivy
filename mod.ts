@@ -1,4 +1,4 @@
-import { CommandClient, Intents, Message, delay } from './deps.ts';
+import { CommandClient, Intents, Message, delay, stripIndent, Embed, GuildTextBasedChannel } from './deps.ts';
 import { config } from './config.ts';
 
 const client = new CommandClient({
@@ -35,5 +35,40 @@ client.on('messageCreate', async (message: Message) => {
 		}
 	}
 });
+
+client.on('messageDelete', async (message: Message) => {
+	if (message.channelID === '789201783901650975') return;
+
+	const dLog = await message.guild!.channels.resolve('790787179663196191') as GuildTextBasedChannel;
+
+	const dEmbed = new Embed()
+		.setThumbnail(message.author.avatarURL())
+		.setFooter(client.user!.username, client.user!.avatarURL())
+		.setColor('#FFA500')
+		.addField('Deleted Message', stripIndent`**> User:** ${message.author}
+		**> Deleted in:** ${message.channel}
+		**> Message:** ${message.content}`, true)
+		.setTimestamp(Date.now());
+
+	return dLog.send(dEmbed);
+});
+
+client.on('messageUpdate', async (oldMessage: Message, newMessage: Message) => {
+	if (oldMessage.channelID === '789201783901650975') return;
+
+	const eLog = await oldMessage.guild!.channels.resolve('790792385889566751') as GuildTextBasedChannel;
+
+	const eEmbed = new Embed()
+		.setThumbnail(oldMessage.author.avatarURL())
+		.setFooter(client.user!.username, client.user!.avatarURL())
+		.setColor('#FFA500')
+		.addField('Deleted Message', stripIndent`**> User:** ${oldMessage.author}
+		**> Edited in:** ${oldMessage.channel}
+		**> Old message:** ${oldMessage.content}
+		**> New message:** ${newMessage.content}`, true)
+		.setTimestamp(Date.now());
+
+	return eLog.send(eEmbed);
+})
 
 client.connect(config.token, Intents.All);
