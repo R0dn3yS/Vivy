@@ -18,7 +18,7 @@ export default class KickCommand extends Command {
 	async execute(ctx: CommandContext) {
 		const kUser = ctx.args!.user as User;
 		const kMember = await ctx.guild!.members.resolve(kUser.id) as Member;
-		const reason: string = ctx.args!.reason as string;
+		const reason = ctx.args!.reason as string;
 		const adminLog = await ctx.guild!.channels.resolve('535389016338464771') as GuildTextBasedChannel;
 
 		if (!kUser.id) {

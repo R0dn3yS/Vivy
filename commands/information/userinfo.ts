@@ -5,6 +5,7 @@ export default class UserinfoCommand extends Command {
 	name = 'userinfo';
 	aliases = ['ui'];
 	category = 'information';
+	optionalArgs = true;
 	args: Args[] = [
 		{
 			name: 'user',
