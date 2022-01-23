@@ -9,6 +9,10 @@ const client = new CommandClient({
 
 client.on('ready', () => {
 	console.log('Ready!');
+	client.setPresence({
+		name: 'to Camellia',
+		type: 'LISTENING',
+	})
 });
 
 client.commands.loader.loadDirectory('./commands', { maxDepth: 2 });
