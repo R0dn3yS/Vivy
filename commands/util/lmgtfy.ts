@@ -1,7 +1,7 @@
 import { Command, CommandContext } from '../../deps.ts';
 import type { Args } from '../../deps.ts';
 
-export default class EightballCommand extends Command {
+export default class LMGTFYCommand extends Command {
   name = 'lmgtfy';
   category = 'util';
   args: Args[] = [

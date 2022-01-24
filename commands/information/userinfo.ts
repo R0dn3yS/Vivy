@@ -1,7 +1,7 @@
 import { Command, CommandContext, Embed, stripIndent } from '../../deps.ts';
 import type { Args, Member, User } from '../../deps.ts';
 
-export default class UserinfoCommand extends Command {
+export default class UserInfoCommand extends Command {
   name = 'userinfo';
   aliases = ['ui'];
   category = 'information';
