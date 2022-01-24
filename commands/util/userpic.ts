@@ -20,6 +20,6 @@ export default class UserPictureCommand extends Command {
       user = ctx.args!.user as User;
     }
 
-    ctx.channel.send(user.avatarURL());
+    ctx.channel.send(user.avatarURL('dynamic'));
   }
 }
