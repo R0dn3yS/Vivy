@@ -1,49 +1,54 @@
-import { CommandContext, Command, Embed, stripIndent } from '../../deps.ts';
-import type { Args, User, Member, GuildTextBasedChannel } from '../../deps.ts';
+import { Command, CommandContext, Embed, stripIndent } from '../../deps.ts';
+import type { Args, GuildTextBasedChannel, Member, User } from '../../deps.ts';
 
 export default class BanCommand extends Command {
-	name = 'ban';
-	category = 'admin';
-	ownerOnly = true;
-	args: Args[] = [
-		{
-			name: 'user',
-			match: 'user'
-		},
-		{
-			name: 'reason',
-			match: 'rest'
-		}
-	]
-	async execute(ctx: CommandContext) {
-		const bUser = ctx.args!.user as User;
-		const bMember = await ctx.guild!.members.resolve(bUser.id) as Member;
-		const reason = ctx.args!.reason as string;
-		const adminLog = await ctx.guild!.channels.resolve('535389016338464771') as GuildTextBasedChannel;
-        
-		if (!bUser.id) {
-			return ctx.message.reply('No user specified.');
-		} else if (!reason) {
-			return ctx.message.reply('Please provide a reason.');
-		}
+  name = 'ban';
+  category = 'admin';
+  ownerOnly = true;
+  args: Args[] = [
+    {
+      name: 'user',
+      match: 'user',
+    },
+    {
+      name: 'reason',
+      match: 'rest',
+    },
+  ];
+  async execute(ctx: CommandContext) {
+    const bUser = ctx.args!.user as User;
+    const bMember = await ctx.guild!.members.resolve(bUser.id) as Member;
+    const reason = ctx.args!.reason as string;
+    const adminLog = await ctx.guild!.channels.resolve(
+      '535389016338464771',
+    ) as GuildTextBasedChannel;
 
-		if (!bMember.bannable) {
-			return ctx.message.reply('I cannot ban this user.');
-		}
+    if (!bUser.id) {
+      return ctx.message.reply('No user specified.');
+    } else if (!reason) {
+      return ctx.message.reply('Please provide a reason.');
+    }
 
-		bMember.ban(reason).catch(e => {
-			console.error(e);
-		}) ;
+    if (!bMember.bannable) {
+      return ctx.message.reply('I cannot ban this user.');
+    }
 
-		const banEmbed = new Embed()
-			.setThumbnail(bUser.avatarURL())
-			.setFooter(ctx.client.user!.username, ctx.client.user!.avatarURL())
-			.setColor('#FF0000')
-			.addField('Member Banned', stripIndent`**> Banned member:** ${bUser}
+    bMember.ban(reason).catch((e) => {
+      console.error(e);
+    });
+
+    const banEmbed = new Embed()
+      .setThumbnail(bUser.avatarURL())
+      .setFooter(ctx.client.user!.username, ctx.client.user!.avatarURL())
+      .setColor('#FF0000')
+      .addField(
+        'Member Banned',
+        stripIndent`**> Banned member:** ${bUser}
 			**> Banned by:** ${ctx.message.author}
-			**> Reason:** ${reason}`)
-			.setTimestamp(Date.now());
+			**> Reason:** ${reason}`,
+      )
+      .setTimestamp(Date.now());
 
-		adminLog.send(banEmbed);
-	}
+    adminLog.send(banEmbed);
+  }
 }

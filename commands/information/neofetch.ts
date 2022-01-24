@@ -1,4 +1,4 @@
-import { CommandContext, Command } from '../../deps.ts';
+import { Command, CommandContext } from '../../deps.ts';
 
 export default class NeofetchCommand extends Command {
   name = 'neofetch';
@@ -8,7 +8,10 @@ export default class NeofetchCommand extends Command {
     let output = new TextDecoder().decode(await neofetch.output());
 
     output = output.replace(/\`/g, '\'');
-    output = output.replace(/(\\[\?25l\\[\?7l)|(\\[19A\\[9999999D)|(\\[41C)/g, '');
+    output = output.replace(
+      /(\\[\?25l\\[\?7l)|(\\[19A\\[9999999D)|(\\[41C)/g,
+      '',
+    );
 
     ctx.channel.send(`\`\`\`ansi\n${output}\n\`\`\``);
   }

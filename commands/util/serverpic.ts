@@ -1,10 +1,10 @@
-import { CommandContext, Command } from '../../deps.ts';
+import { Command, CommandContext } from '../../deps.ts';
 
 export default class ServerpictureCommand extends Command {
-	name =  'serverpicture';
-	aliases = ['serverpic'];
-	category = 'util';
-	execute(ctx: CommandContext) {
-		ctx.channel.send(ctx.guild?.iconURL());
-	}
+  name = 'serverpicture';
+  aliases = ['serverpic'];
+  category = 'util';
+  execute(ctx: CommandContext) {
+    ctx.channel.send(ctx.guild?.iconURL());
+  }
 }
