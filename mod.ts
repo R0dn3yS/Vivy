@@ -48,6 +48,7 @@ client.on('messageCreate', async (message: Message) => {
 
 client.on('messageDelete', async (message: Message) => {
   if (message.channelID === '789201783901650975') return;
+  if (message.content.length > 1000) return;
 
   const dLog = await message.guild!.channels.resolve(
     '790787179663196191',
@@ -72,6 +73,8 @@ client.on('messageDelete', async (message: Message) => {
 client.on('messageUpdate', async (oldMessage: Message, newMessage: Message) => {
   if (oldMessage.channelID === '789201783901650975') return;
   if (oldMessage.content === newMessage.content) return;
+  if (oldMessage.content.length > 500) return;
+  if (newMessage.content.length > 500) return;
 
   const eLog = await oldMessage.guild!.channels.resolve(
     '790792385889566751',
