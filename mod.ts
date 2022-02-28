@@ -7,11 +7,11 @@ const client = new CommandClient({
   owners: config.owners,
 });
 
-client.on('ready', () => {
-  console.log('Ready!');
+client.on('ready', async () => {
+  console.log(`${client.user!.username} is ready on ${await client.guilds.size()} servers.`);
   client.setPresence({
-    name: 'Camellia',
-    type: 'LISTENING',
+    name: 'anime',
+    type: 'WATCHING',
   });
 });
 
