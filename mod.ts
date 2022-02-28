@@ -1,4 +1,4 @@
-import { CommandClient, Embed, GuildTextBasedChannel, Intents, Message, stripIndent } from './deps.ts';
+import { CommandClient, Embed, GuildTextBasedChannel, Intents, Message, stripIndent, VoiceChannel } from './deps.ts';
 import { delay } from './util/delay.ts';
 import { config } from './config.ts';
 
@@ -13,6 +13,8 @@ client.on('ready', async () => {
     name: 'anime',
     type: 'WATCHING',
   });
+	const countChannel: VoiceChannel = await client.channels.resolve('947819208518008874') as VoiceChannel;
+	await countChannel.edit({ name: `Members: ${ countChannel.guild.memberCount }` })
 });
 
 client.commands.loader.loadDirectory('./commands', { maxDepth: 2 });
