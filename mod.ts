@@ -3,6 +3,7 @@ import { delay } from './util/delay.ts';
 import { config } from './config.ts';
 
 let memberCount: number;
+let countChannel: VoiceChannel;
 
 const client = new CommandClient({
   prefix: '\\',
@@ -15,7 +16,7 @@ client.on('ready', async () => {
     name: 'anime',
     type: 'WATCHING',
   });
-	const countChannel: VoiceChannel = await client.channels.resolve('947819208518008874') as VoiceChannel;
+	countChannel = await client.channels.resolve('947819208518008874') as VoiceChannel;
 	memberCount = await countChannel.guild.memberCount!;
 	console.log(`Guild has ${memberCount} members`);
 	await countChannel.edit({ name: `Members: ${ memberCount }` });
@@ -104,13 +105,11 @@ client.on('messageUpdate', async (oldMessage: Message, newMessage: Message) => {
 });
 
 client.on('guildMemberAdd', async (_member: Member) => {
-	const countChannel = await client.channels.resolve('947819208518008874') as VoiceChannel;
 	memberCount += 1;
 	await countChannel.edit({ name: `Members: ${ memberCount }` });
 });
 
 client.on('guildMemberRemove', async (_member: Member) => {
-	const countChannel = await client.channels.resolve('947819208518008874') as VoiceChannel;
 	memberCount -= 1;
 	await countChannel.edit({ name: `Members: ${ memberCount }` });
 });
