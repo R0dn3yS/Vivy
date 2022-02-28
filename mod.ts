@@ -16,7 +16,8 @@ client.on('ready', async () => {
     type: 'WATCHING',
   });
 	const countChannel: VoiceChannel = await client.channels.resolve('947819208518008874') as VoiceChannel;
-	memberCount = countChannel.guild.memberCount!;
+	memberCount = await countChannel.guild.memberCount!;
+	console.log(`Guild has ${memberCount} members`);
 	await countChannel.edit({ name: `Members: ${ memberCount }` });
 });
 
