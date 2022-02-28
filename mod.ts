@@ -2,6 +2,8 @@ import { CommandClient, Embed, GuildTextBasedChannel, Intents, Message, stripInd
 import { delay } from './util/delay.ts';
 import { config } from './config.ts';
 
+let memberCount: number;
+
 const client = new CommandClient({
   prefix: '\\',
   owners: config.owners,
@@ -14,7 +16,8 @@ client.on('ready', async () => {
     type: 'WATCHING',
   });
 	const countChannel: VoiceChannel = await client.channels.resolve('947819208518008874') as VoiceChannel;
-	await countChannel.edit({ name: `Members: ${ countChannel.guild.memberCount }` });
+	memberCount = countChannel.guild.memberCount!;
+	await countChannel.edit({ name: `Members: ${ memberCount }` });
 });
 
 client.commands.loader.loadDirectory('./commands', { maxDepth: 2 });
@@ -100,13 +103,15 @@ client.on('messageUpdate', async (oldMessage: Message, newMessage: Message) => {
 });
 
 client.on('guildMemberAdd', async (_member: Member) => {
-	const countChannel: VoiceChannel = await client.channels.resolve('947819208518008874') as VoiceChannel;
-	await countChannel.edit({ name: `Members: ${ countChannel.guild.memberCount }` })
+	const countChannel = await client.channels.resolve('947819208518008874') as VoiceChannel;
+	memberCount += 1;
+	await countChannel.edit({ name: `Members: ${ memberCount }` });
 });
 
 client.on('guildMemberRemove', async (_member: Member) => {
-	const countChannel: VoiceChannel = await client.channels.resolve('947819208518008874') as VoiceChannel;
-	await countChannel.edit({ name: `Members: ${ countChannel.guild.memberCount }` })
+	const countChannel = await client.channels.resolve('947819208518008874') as VoiceChannel;
+	memberCount -= 1;
+	await countChannel.edit({ name: `Members: ${ memberCount }` });
 });
 
 client.connect(config.token, Intents.All);
