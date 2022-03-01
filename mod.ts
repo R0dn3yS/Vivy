@@ -1,4 +1,4 @@
-import { CommandClient, Embed, GuildTextBasedChannel, Intents, Message, stripIndent, VoiceChannel, Member } from './deps.ts';
+import { CommandClient, Embed, GuildTextBasedChannel, Intents, Member, Message, stripIndent, VoiceChannel } from './deps.ts';
 import { delay } from './util/delay.ts';
 import { config } from './config.ts';
 
@@ -16,10 +16,10 @@ client.on('ready', async () => {
     name: 'anime',
     type: 'WATCHING',
   });
-	countChannel = await client.channels.resolve('947819208518008874') as VoiceChannel;
-	memberCount = await countChannel.guild.memberCount!;
-	console.log(`Guild has ${memberCount} members`);
-	await countChannel.edit({ name: `Members: ${ memberCount }` });
+  countChannel = await client.channels.resolve('947819208518008874') as VoiceChannel;
+  memberCount = await countChannel.guild.memberCount!;
+  console.log(`Guild has ${memberCount} members`);
+  await countChannel.edit({ name: `Members: ${memberCount}` });
 });
 
 client.commands.loader.loadDirectory('./commands', { maxDepth: 2 });
@@ -105,17 +105,17 @@ client.on('messageUpdate', async (oldMessage: Message, newMessage: Message) => {
 });
 
 client.on('guildMemberAdd', async (_member: Member) => {
-	memberCount += 1;
-	await countChannel.edit({ name: `Members: ${ memberCount }` });
+  memberCount += 1;
+  await countChannel.edit({ name: `Members: ${memberCount}` });
 });
 
 client.on('guildMemberRemove', async (_member: Member) => {
-	memberCount -= 1;
-	await countChannel.edit({ name: `Members: ${ memberCount }` });
+  memberCount -= 1;
+  await countChannel.edit({ name: `Members: ${memberCount}` });
 });
 
-client.on('commandNotFound', async message => {
-  await message.reply('This command does not exist you fucking idiot.').then(async msg => {
+client.on('commandNotFound', async (message) => {
+  await message.reply('This command does not exist you fucking idiot.').then(async (msg) => {
     await delay(2500);
     msg.delete();
     message.delete();
