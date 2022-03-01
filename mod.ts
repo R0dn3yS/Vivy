@@ -114,4 +114,12 @@ client.on('guildMemberRemove', async (_member: Member) => {
 	await countChannel.edit({ name: `Members: ${ memberCount }` });
 });
 
+client.on('commandNotFound', async message => {
+  await message.reply('This command does not exist you fucking idiot.').then(async msg => {
+    await delay(2500);
+    msg.delete();
+    message.delete();
+  });
+});
+
 client.connect(config.token, Intents.All);
