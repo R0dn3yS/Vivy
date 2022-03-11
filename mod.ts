@@ -13,7 +13,7 @@ const client = new CommandClient({
 client.on('ready', async () => {
   console.log(`${client.user!.username} is ready on ${await client.guilds.size()} servers.`);
   client.setPresence({
-    name: 'anime',
+    name: 'over you',
     type: 'WATCHING',
   });
   countChannel = await client.channels.resolve('947819208518008874') as VoiceChannel;
