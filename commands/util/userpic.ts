@@ -3,7 +3,7 @@ import type { Args, User } from '../../deps.ts';
 
 export default class UserPictureCommand extends Command {
   name = 'userpicture';
-  aliases = ['userpic'];
+  aliases = ['userpic', 'pfp'];
   category = 'util';
   optionalArgs = true;
   args: Args[] = [
