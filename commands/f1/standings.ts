@@ -8,7 +8,7 @@ export default class StandingsCommand extends Command {
 		const apiJson = await res.json();
 
 		const driverArray: string[] = [];
-		for (let i = 0; i < 20; i++) {
+		for (let i = 0; i < parseInt(apiJson.MRData.total); i++) {
 			const position = apiJson.MRData.StandingsTable.StandingsLists[0].DriverStandings[i].position;
 			const givenName = apiJson.MRData.StandingsTable.StandingsLists[0].DriverStandings[i].Driver.givenName;
 			const familyName = apiJson.MRData.StandingsTable.StandingsLists[0].DriverStandings[i].Driver.familyName;
