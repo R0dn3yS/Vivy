@@ -15,13 +15,16 @@ export default class StandingsCommand extends Command {
 			driverArray.push(`${givenName} ${familyName}`);
 		}
 
-		const embed = new Embed()
-			.setTitle('F1 2022 Driver Standings')
-			.setColor('#FF0000');
+		let desc = '';
 
 		for (const driver of driverArray) {
-			embed.addField('', driver);
+			desc += `${driver}\n`;
 		}
+
+		const embed = new Embed()
+			.setTitle('F1 2022 Driver Standings')
+			.setColor('#FF0000')
+			.setDescription(desc);
 
 		ctx.channel.send(embed);
 	}
