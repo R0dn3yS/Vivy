@@ -9,10 +9,12 @@ export default class StandingsCommand extends Command {
 
 		const driverArray: string[] = [];
 		for (let i = 0; i < 20; i++) {
+			const position = apiJson.MRData.StandingsTable.StandingsLists[0].DriverStandings[i].position;
 			const givenName = apiJson.MRData.StandingsTable.StandingsLists[0].DriverStandings[i].Driver.givenName;
 			const familyName = apiJson.MRData.StandingsTable.StandingsLists[0].DriverStandings[i].Driver.familyName;
+			const points = apiJson.MRData.StandingsTable.StandingsLists[0].DriverStandings[i].points;
 
-			driverArray.push(`${givenName} ${familyName}`);
+			driverArray.push(`#${position} ${givenName} ${familyName}: ${points}`);
 		}
 
 		let desc = '';
