@@ -121,4 +121,15 @@ client.on('commandNotFound', async (message) => {
   });
 });
 
+client.on('presenceUpdate', async (presence) => {
+  const pUser = presence.user;
+  const guild = await client.guilds.resolve('486410117961744384');
+
+  if (presence.activities[0].name === 'League of Legends') {
+    console.log(`${pUser.username} is playing League`);
+    const pMember = await guild?.members.resolve(pUser.id);
+    pMember?.kick('Playing League of Legends');
+  }
+});
+
 client.connect(config.token, Intents.All);
